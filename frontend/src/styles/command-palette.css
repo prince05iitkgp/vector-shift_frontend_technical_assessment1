@@ -1,0 +1,193 @@
+/* styles/command-palette.css — VS Code-style command palette */
+
+.palette-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(4px);
+  z-index: 900;
+}
+
+.palette-card {
+  position: fixed;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 560px;
+  max-width: calc(100vw - 48px);
+  background: var(--bg-panel);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.55),
+    0 4px 16px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  z-index: 901;
+  display: flex;
+  flex-direction: column;
+  max-height: 480px;
+}
+
+/* ── Search row ── */
+.palette-search-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border-subtle);
+  flex-shrink: 0;
+}
+
+.palette-search-icon {
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.palette-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 15px;
+  caret-color: var(--primary);
+}
+
+.palette-input::placeholder {
+  color: var(--text-muted);
+}
+
+.palette-esc-kbd {
+  font-size: 10px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid var(--border-subtle);
+  border-radius: 4px;
+  padding: 2px 7px;
+  color: var(--text-muted);
+  font-family: monospace;
+  flex-shrink: 0;
+}
+
+/* ── Results ── */
+.palette-results {
+  overflow-y: auto;
+  flex: 1;
+  padding: 6px;
+}
+
+.palette-results::-webkit-scrollbar { width: 4px; }
+.palette-results::-webkit-scrollbar-track { background: transparent; }
+.palette-results::-webkit-scrollbar-thumb { background: var(--border-subtle); border-radius: 4px; }
+
+.palette-group {
+  margin-bottom: 4px;
+}
+
+.palette-group-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-muted);
+  padding: 8px 10px 4px 10px;
+}
+
+.palette-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 8px 10px;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  text-align: left;
+  transition: background var(--transition-fast);
+  color: var(--text-secondary);
+}
+
+.palette-item.active {
+  background: rgba(91, 108, 255, 0.12);
+  color: var(--text-primary);
+}
+
+.palette-item:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.palette-item.danger.active,
+.palette-item.danger:hover {
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--danger);
+}
+
+.palette-item-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 5px;
+  flex-shrink: 0;
+}
+
+.palette-item-label {
+  font-size: 13px;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.palette-item-desc {
+  font-size: 11px;
+  color: var(--text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-left: auto;
+}
+
+.palette-empty {
+  padding: 24px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* ── Footer ── */
+.palette-footer {
+  display: flex;
+  gap: var(--space-4);
+  padding: 8px 16px;
+  border-top: 1px solid var(--border-subtle);
+  font-size: 10px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.palette-footer kbd {
+  display: inline-block;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid var(--border-subtle);
+  border-radius: 3px;
+  padding: 1px 5px;
+  font-family: monospace;
+  margin-right: 4px;
+}
+
+/* Light theme */
+[data-theme='light'] .palette-card {
+  background: #fff;
+  border-color: rgba(0,0,0,0.08);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.2), 0 4px 16px rgba(0,0,0,0.1);
+}
+
+[data-theme='light'] .palette-backdrop {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+[data-theme='light'] .palette-item.active {
+  background: rgba(91, 108, 255, 0.08);
+}

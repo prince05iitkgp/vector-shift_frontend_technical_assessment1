@@ -1,0 +1,243 @@
+/* styles/index.css — Enterprise Design Tokens */
+
+:root {
+  color-scheme: dark;
+  /* ============================================================
+     ENTERPRISE COLOR SYSTEM
+     ============================================================ */
+  --bg-primary:      #0B1220; /* Deep app background */
+  --bg-surface:      #111827; /* Main surface (canvas/panels) */
+  --bg-panel:        #161F2F; /* Elevated panels / Sidebars */
+  --bg-node:         #161F2F; /* Node cards */
+  --bg-node-hover:   #1C263B; /* Node hover */
+  --bg-input:        rgba(0, 0, 0, 0.2); /* Input fields */
+  --bg-select:       rgba(0, 0, 0, 0.2);
+
+  --text-primary:    #F9FAFB;
+  --text-secondary:  #D1D5DB;
+  --text-muted:      #94A3B8;
+
+  --border-subtle:   rgba(255, 255, 255, 0.06);
+  --border-node:     rgba(255, 255, 255, 0.1);
+  --border-input:    rgba(255, 255, 255, 0.1);
+  
+  /* Brand Colors */
+  --primary:         #5B6CFF; /* Muted, premium Indigo */
+  --primary-hover:   #6F7EFF;
+  --success:         #10B981; /* Enterprise Green */
+  --warning:         #F59E0B;
+  --danger:          #EF4444;
+
+  /* Node Accents (Matches lucide-react aesthetics) */
+  --accent-input:    #10B981;
+  --accent-llm:      #8B5CF6; /* Purple for AI */
+  --accent-logic:    #F59E0B;
+  --accent-output:   #EF4444;
+  --accent-utility:  #64748b;
+  --accent-text:     #3B82F6;
+
+  /* ============================================================
+     TYPOGRAPHY
+     ============================================================ */
+  --font-heading:    'Outfit', sans-serif;
+  --font-body:       'Inter', sans-serif;
+
+  /* ============================================================
+     SPACING & RADIUS
+     ============================================================ */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+
+  /* ============================================================
+     SHADOWS & ELEVATION
+     ============================================================ */
+  --shadow-sm:       0 1px 2px rgba(0, 0, 0, 0.2);
+  --shadow-md:       0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg:       0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+
+  /* Transitions */
+  --transition-fast: 150ms ease-out; /* Standardized to 150ms max per expert feedback */
+}
+
+/* Light Theme Overrides (Optional/Not default) */
+[data-theme="light"] {
+  color-scheme: light;
+  --bg-primary:      #F3F4F6;
+  --bg-surface:      #FFFFFF;
+  --bg-panel:        #F9FAFB;
+  --bg-node:         #FFFFFF;
+  --bg-node-hover:   #F3F4F6;
+  --bg-input:        #F9FAFB;
+  
+  --text-primary:    #111827;
+  --text-secondary:  #4B5563;
+  --text-muted:      #6B7280;
+
+  --border-subtle:   rgba(0, 0, 0, 0.08);
+  --border-node:     rgba(0, 0, 0, 0.12);
+  --border-input:    rgba(0, 0, 0, 0.15);
+}
+
+/* ============================================================
+   GLOBAL RESET
+   ============================================================ */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-primary);
+  background-image: radial-gradient(circle at top right, rgba(91, 108, 255, 0.08) 0%, transparent 40%),
+                    radial-gradient(circle at bottom left, rgba(16, 185, 129, 0.05) 0%, transparent 30%);
+  background-attachment: fixed;
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+[data-theme="light"] body {
+  background-image: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  margin: 0;
+}
+
+/* ============================================================
+   APP SHELL LAYOUT
+   ============================================================ */
+.app-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  background: transparent;
+}
+
+.app-main {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.app-canvas-area {
+  flex: 1;
+  position: relative;
+  background-color: transparent;
+  min-width: 0; /* prevent flex overflow */
+}
+
+/* ── Right-panel resize handle ── */
+.right-resize-handle {
+  width: 4px;
+  flex-shrink: 0;
+  background: transparent;
+  cursor: col-resize;
+  position: relative;
+  z-index: 20;
+  transition: background var(--transition-fast);
+}
+
+.right-resize-handle::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 4px;
+  height: 32px;
+  border-radius: 4px;
+  background: var(--border-subtle);
+  transition: background var(--transition-fast), height var(--transition-fast);
+}
+
+.right-resize-handle:hover::after,
+.right-resize-handle:active::after {
+  background: var(--primary);
+  height: 48px;
+}
+
+/* ============================================================
+   REACT FLOW OVERRIDES
+   ============================================================ */
+.react-flow__pane {
+  cursor: grab;
+}
+.react-flow__pane:active {
+  cursor: grabbing;
+}
+
+.react-flow__minimap {
+  background: rgba(11, 18, 32, 0.3) !important;
+  backdrop-filter: blur(8px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.04) !important;
+  border-radius: 12px !important;
+  opacity: 0.6;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+  overflow: hidden;
+}
+
+@keyframes flowAnimation {
+  from {
+    stroke-dashoffset: 24;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.react-flow__edge-path {
+  stroke: rgba(255, 255, 255, 0.7) !important;
+  stroke-width: 2px !important;
+}
+
+.react-flow__edge.animated .react-flow__edge-path {
+  stroke: rgba(255, 255, 255, 0.85) !important;
+  stroke-width: 2px !important;
+  stroke-dasharray: 5 4 !important;
+  animation: flowAnimation 0.8s linear infinite !important;
+}
+
+/* Selected edge — dark mode */
+.react-flow__edge.selected .react-flow__edge-path {
+  stroke: var(--primary) !important;
+  stroke-width: 2.5px !important;
+  stroke-dasharray: 5 4 !important;
+  animation: flowAnimation 0.8s linear infinite !important;
+  filter: drop-shadow(0 0 4px rgba(91, 108, 255, 0.4));
+}
+
+/* ── Light theme edges (dark lines on white canvas) ── */
+[data-theme='light'] .react-flow__edge-path {
+  stroke: rgba(0, 0, 0, 0.45) !important;
+  stroke-width: 2px !important;
+}
+
+[data-theme='light'] .react-flow__edge.animated .react-flow__edge-path {
+  stroke: rgba(30, 41, 59, 0.7) !important;
+  stroke-width: 2px !important;
+  stroke-dasharray: 5 4 !important;
+  animation: flowAnimation 0.8s linear infinite !important;
+}
+
+[data-theme='light'] .react-flow__edge.selected .react-flow__edge-path {
+  stroke: var(--primary) !important;
+  stroke-width: 2.5px !important;
+  stroke-dasharray: 5 4 !important;
+  animation: flowAnimation 0.8s linear infinite !important;
+  filter: drop-shadow(0 0 4px rgba(91, 108, 255, 0.4));
+}

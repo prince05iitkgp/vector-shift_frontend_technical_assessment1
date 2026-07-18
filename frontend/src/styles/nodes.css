@@ -1,0 +1,264 @@
+/* styles/nodes.css — Refined node styles (VectorShift-inspired, not cloned) */
+
+/* ============================================================
+   BASE NODE — flatter, more refined
+   ============================================================ */
+.node-wrapper {
+  position: relative;
+  background: var(--bg-node);
+  border: 1px solid var(--border-node);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  width: 240px;
+  font-family: var(--font-body);
+  transition:
+    box-shadow var(--transition-fast),
+    border-color var(--transition-fast),
+    transform var(--transition-fast);
+  overflow: visible;
+}
+
+.node-wrapper:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: var(--shadow-md);
+}
+
+.node-wrapper.selected {
+  border: 1px solid var(--node-accent, var(--accent-input));
+  box-shadow: 0 0 0 1px var(--node-accent, var(--accent-input));
+}
+
+/* Accent top border (instead of heavy left bar) */
+.node-accent-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--node-accent, var(--accent-input));
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  opacity: 0.85;
+}
+
+/* ── Header ── */
+.node-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 9px var(--space-3) 7px var(--space-3);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.node-icon {
+  font-size: 13px;
+  line-height: 1;
+  flex-shrink: 0;
+  opacity: 0.9;
+}
+
+.node-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  flex: 1;
+}
+
+.node-badge {
+  font-size: 9px;
+  font-weight: 600;
+  color: var(--node-accent, var(--accent-input));
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.07);
+  padding: 1px 5px;
+  border-radius: 3px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.node-delete-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 10px;
+  line-height: 1;
+  padding: 3px 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: background var(--transition-fast), color var(--transition-fast);
+  margin-left: 4px;
+  position: relative;
+  z-index: 100;
+  pointer-events: all;
+}
+
+.node-delete-btn:hover {
+  background: rgba(239, 68, 68, 0.15);
+  color: #ef4444;
+}
+
+/* ── Body ── */
+.node-body {
+  padding: var(--space-2) var(--space-3) var(--space-3) var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+/* ── Field groups ── */
+.node-field {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.node-label {
+  font-size: 9.5px;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+
+.node-input {
+  background: var(--bg-input);
+  border: 1px solid var(--border-input);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 12px;
+  padding: 4px 7px;
+  width: 100%;
+  outline: none;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.node-input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(91, 108, 255, 0.1);
+}
+
+.node-select {
+  width: 100%;
+  padding: var(--space-2);
+  background: var(--bg-select);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 12px;
+  padding: 4px 24px 4px 7px;
+  width: 100%;
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  border: 1px solid var(--border-input);
+  border-radius: var(--radius-md);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='5' viewBox='0 0 8 5'%3E%3Cpath d='M0 0l4 5 4-5z' fill='%23546a82'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 7px center;
+  transition: border-color var(--transition-fast);
+}
+
+.node-select option {
+  background-color: var(--bg-panel);
+  color: var(--text-primary);
+}
+
+.node-select:focus {
+  border-color: var(--primary);
+}
+
+.node-textarea {
+  background: var(--bg-input);
+  border: 1px solid var(--border-input);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 12px;
+  line-height: 1.5;
+  padding: 4px 7px;
+  width: 100%;
+  min-width: 170px;
+  min-height: 56px;
+  outline: none;
+  resize: none;
+  overflow: hidden;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.node-textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(91, 108, 255, 0.1);
+}
+
+/* Note node */
+.node-wrapper.note-node {
+  background: rgba(224, 123, 52, 0.05);
+  border-color: rgba(224, 123, 52, 0.15);
+  border-style: dashed;
+}
+
+/* ============================================================
+   HANDLES — smaller (9px), subtler glow
+   ============================================================ */
+.react-flow__handle {
+  width: 10px !important;
+  height: 10px !important;
+  border: 1.5px solid var(--node-accent, var(--accent-input)) !important;
+  background: var(--bg-node) !important;
+  border-radius: 5px !important;
+  transition:
+    transform var(--transition-fast),
+    background var(--transition-fast),
+    box-shadow var(--transition-fast) !important;
+  z-index: 10;
+}
+
+.react-flow__handle:hover {
+  transform: scale(1.5) !important;
+  background: var(--node-accent, var(--accent-input)) !important;
+  box-shadow: 0 0 6px var(--node-accent, var(--accent-input)) !important;
+}
+
+.react-flow__handle-right {
+  right: -5px !important;
+  background: var(--node-accent, var(--accent-input)) !important;
+}
+
+.react-flow__handle-left {
+  left: -5px !important;
+}
+
+/* Variable handles on TextNode */
+.react-flow__handle.variable-handle {
+  border-color: var(--accent-text) !important;
+}
+
+.react-flow__handle.variable-handle.react-flow__handle-right {
+  background: var(--accent-text) !important;
+}
+
+.react-flow__handle.variable-handle:hover {
+  background: var(--accent-text) !important;
+  box-shadow: 0 0 6px var(--accent-text) !important;
+}
+
+/* Port labels that appear on hover */
+.handle-port-label {
+  position: absolute;
+  font-size: 9px;
+  font-weight: 500;
+  color: var(--text-muted);
+  pointer-events: none;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.react-flow__handle:hover + .handle-port-label,
+.node-wrapper:hover .handle-port-label {
+  opacity: 1;
+}

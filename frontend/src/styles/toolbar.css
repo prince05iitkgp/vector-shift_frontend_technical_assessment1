@@ -1,0 +1,150 @@
+/* styles/toolbar.css — Grouped toolbar with category separators */
+
+/* ============================================================
+   PIPELINE HEADER (name row)
+   ============================================================ */
+.pipeline-header {
+  display: flex;
+  align-items: center;
+  padding: 0 var(--space-4);
+  height: 36px;
+  background: var(--bg-header);
+  border-bottom: 1px solid var(--border-subtle);
+  flex-shrink: 0;
+  gap: var(--space-3);
+}
+
+/* ============================================================
+   NODE PALETTE (toolbar row below header)
+   ============================================================ */
+.pipeline-toolbar {
+  display: flex;
+  align-items: center;
+  padding: 0 var(--space-4);
+  height: 44px;
+  background: var(--bg-toolbar);
+  border-bottom: 1px solid var(--border-subtle);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  gap: var(--space-2);
+  flex-shrink: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.pipeline-toolbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Category label */
+.toolbar-group-label {
+  font-size: 9px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Vertical divider between groups */
+.toolbar-divider {
+  width: 1px;
+  height: 20px;
+  background: var(--border-subtle);
+  flex-shrink: 0;
+  margin: 0 var(--space-1);
+}
+
+/* Brand area (left) */
+.toolbar-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-right: var(--space-3);
+  flex-shrink: 0;
+}
+
+.toolbar-brand-icon {
+  width: 26px;
+  height: 26px;
+  background: linear-gradient(135deg, var(--accent-llm), var(--accent-input));
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+}
+
+.toolbar-brand-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+/* Group container */
+.toolbar-group {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+/* ============================================================
+   DRAGGABLE NODE CHIP — compact & refined
+   ============================================================ */
+.draggable-node {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  cursor: grab;
+  user-select: none;
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast),
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.draggable-node:hover {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: var(--node-accent, var(--accent-input));
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.draggable-node:active {
+  cursor: grabbing;
+  transform: scale(0.96);
+}
+
+/* Color dot */
+.draggable-node-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--node-accent, var(--accent-input));
+  flex-shrink: 0;
+}
+
+.draggable-node-icon {
+  font-size: 11px;
+  line-height: 1;
+}
+
+.draggable-node-label {
+  font-size: 11.5px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: color var(--transition-fast);
+}
+
+.draggable-node:hover .draggable-node-label {
+  color: var(--text-primary);
+}
